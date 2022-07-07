@@ -6,28 +6,35 @@ public class EmployeeWageComputation {
         final int part_time = 1;
         final int full_time = 2;
         final int WAGE_PER_HR = 20;
-        final int WORKING_DAYS = 20;
-    
+        final int MAX_WORKING_DAYS = 20;
+        final int MAX_WORKING_HRS = 100;
+
         int totalwage = 0;
-        for (int day = 1; day <= WORKING_DAYS; day++)
+        int workinghrs = 0;
+        System.out.printf("%5s     %5s     %5s     %5s\n", "Day", "Workinghrs", "Wage", "Total working hrs");
+        for (int day = 1, totalworkinghrs = 0; day <= MAX_WORKING_DAYS
+                && totalworkinghrs < MAX_WORKING_HRS; day++, totalworkinghrs += workinghrs)
         {
+
             int emptype = (int) (Math.random() * 100) % 3;
-            int workinghours =0;
             switch (emptype)
             {
-                case full_time:
-                    workinghours = 8;
-                    break;
-                case part_time:
-                    workinghours = 4;
-                    break;
-                default:
+            case full_time:
+                workinghrs = 8;
+                break;
+            case part_time:
+                workinghrs = 4;
+                break;
+            default:
+                workinghrs = 0;
+                break;
             }
-            int wage = workinghours * WAGE_PER_HR;
-            System.out.println("Day " + day + " wage is:" + wage);
+            int wage = workinghrs * WAGE_PER_HR;
             totalwage += wage;
+            System.out.printf("%5d       %5d      %5d      %5d\n", day, workinghrs, wage, totalworkinghrs + workinghrs);
+
         }
-        System.out.println("Total wage for a month is " + totalwage);        
+        System.out.println("Total wage for a month is " + totalwage);
     }
 
 }
